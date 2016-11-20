@@ -1,23 +1,23 @@
-var blah = document.getElementById("document-search");
+var search = document.getElementById("document-search");
 
-var cars = ["Calculus 1 For Engineers Exam 1",
-            "Calculus 2 For Engineers Exam 3",
-            "Discrete Math for Computer Scientists Final Exam",
-            "Biology Laboratory for Biology Majors Quiz 5"];
+// var cars = ["Calculus 1 For Engineers Exam 1",
+//             "Calculus 2 For Engineers Exam 3",
+//             "Discrete Math for Computer Scientists Final Exam",
+//             "Biology Laboratory for Biology Majors Quiz 5"];
 
 new autoComplete({
-    selector: blah,
+    selector: search,
     minChars: 2,
-    source: function(term, suggest){
-        term = term.toLowerCase();
-        var choices = cars;
-        var matches = [];
-        for (i=0; i<choices.length; i++)
-            if (~choices[i].toLowerCase().indexOf(term))
-            {
-              matches.push(choices[i]);
-            }
-        suggest(matches);
+    source: function(term, response) {
+
+        axios.get('/search?term=' + term)
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
     }
 });
 
