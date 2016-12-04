@@ -21,6 +21,17 @@ new autoComplete({
     }
 });
 
+function login()
+{
+    axios.post('/login)
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
 function popModal(modalType)
 {
     var search_container = document.getElementById("search-container");

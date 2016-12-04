@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>StuddyBuddy - Error</title>
+
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
+
+  <!-- CSS  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bigfishtv-turret/3.3.1/turret.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">"
+
+</head>
+<body>
+
+  <div class="navbar">
+    <button><a href="/" id="back-btn" class="button button-small" style="margin: 5px; display:none;">Back></a></button>
+  </div>
+
+  <div class="flex-container page column">
+    <div id="main-container" class="centered" style="max-width: 800px;">
+
+      <div style="margin-bottom: 25px;">
+        <h1 class="huge-header">That's an error.</h1>
+      </div>
+
+      <div style="margin-bottom: 25px;">
+        <h2> {{ MESSAGE }} </h2>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Made by Mark and Tony &copy; 2016
+  </div>
+
+  <!-- Axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.min.js"></script>
+
+  <!-- AutoComplete -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.js"></script>
+
+  <!-- Custom JS -->
+  <script src="static/js/index.js"></script>
+
+</body>
+</html>
