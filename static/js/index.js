@@ -21,22 +21,34 @@ new autoComplete({
     }
 });
 
-function popModal()
+function popModal(modalType)
 {
-    var login_btn = document.getElementById("login-btn");
-    var auth_modal = document.getElementById("auth-modal");
     var search_container = document.getElementById("search-container");
+    var correct_modal = document.getElementById(modalType + "-modal");
+    var login_modal = document.getElementById("login-modal");
+    var register_modal = document.getElementById("register-modal");
+    var login_btn = document.getElementById("login-btn");
+    var register_btn = document.getElementById("register-btn");
+    var back_btn = document.getElementById("back-btn");
 
-    if(auth_modal.style.display == "none")
+    if(back_btn.style.display === "none")
     {
         search_container.style.display = "none";
-        auth_modal.style.display = "block";
-        login_btn.innerText = "Back";
+        correct_modal.style.display = "block";
+        login_btn.style.display = "none";
+        register_btn.style.display = "none";
+        back_btn.style.display = "block";
     }
-    else if(auth_modal.style.display == "block")
+    else if(back_btn.style.display === "block")
     {
-        auth_modal.style.display = "none";
         search_container.style.display = "block";
-        login_btn.innerText = "Login";
+        login_modal.style.display = "none";
+        register_modal.style.display = "none";
+        login_btn.style.display = "block";
+        register_btn.style.display = "block";
+        back_btn.style.display = "none";
     }
+
+
+
 }

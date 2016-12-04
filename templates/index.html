@@ -19,7 +19,9 @@
 <body>
 
   <div class="navbar">
-    <button id="login-btn" class="button button-small" onclick="popModal()" style="margin: 5px;">Login</button>
+    <button id="register-btn" class="button button-small" onclick="popModal('register')" style="margin: 5px;">Register</button>
+    <button id="login-btn" class="button button-small" onclick="popModal('login')" style="margin: 5px;">Login</button>
+    <button id="back-btn" class="button button-small" onclick="popModal('back')" style="margin: 5px; display:none;">Back</button>
   </div>
 
   <div class="flex-container page column">
@@ -39,16 +41,35 @@
 
     </div>
 
-    <div id="auth-modal" class="card centered animated fadeIn" style="height: 350px; max-width: 500px; display: none;">
-      <h1>Login to StudyBuddy</h1>
+    <div id="login-modal" class="card centered animated fadeIn" style="height: 350px; max-width: 500px; display: none;">
+      <form action="/login" method="post">
+        <h1>Login to StudyBuddy</h1>
 
-        <label for="fieldset-email" style="text-align: left;">Email</label>
-        <input type="email" id="fieldset-email" placeholder="rweasely@hogwarts.edu">
+          <label for="fieldset-email" style="text-align: left;">Email</label>
+          <input type="email" name="email" id="fieldset-email" placeholder="rweasely@hogwarts.edu">
 
-        <label for="fieldset-password" style="text-align: left;">Password</label>
-        <input type="password" id="fieldset-password" placeholder="h3rm10n3">
+          <label for="fieldset-password" style="text-align: left;">Password</label>
+          <input type="password" name="pass" id="fieldset-password" placeholder="h3rm10n3">
 
-        <button type="submit" class="button">Login</button>
+          <button type="submit" class="button">Login</button>
+      </form>
+    </div>
+
+    <div id="register-modal" class="card centered animated fadeIn" style="height: 450px; max-width: 500px; display: none;">
+      <form action="/register" method="post">
+        <h1>Register for StudyBuddy</h1>
+
+          <label for="fieldset-email" style="text-align: left;">Email</label>
+          <input type="email" name="email" id="fieldset-email" placeholder="rweasely@hogwarts.edu">
+
+          <label for="fieldset-username" style="text-align: left;">Username</label>
+          <input type="text" name="username" id="fieldset-username" placeholder="rweasely@hogwarts.edu">
+
+          <label for="fieldset-password" style="text-align: left;">Password</label>
+          <input type="password" name="pass" id="fieldset-password" placeholder="h3rm10n3">
+
+          <button type="submit" class="button">Register</button>
+      </form>
     </div>
 
   </div>

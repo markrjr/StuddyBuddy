@@ -1,0 +1,16 @@
+{
+    "remotePath": "/home/markrjr/StuddyBuddy",
+    "host": "markdown.ml",
+    "username": "markrjr",
+    "password": "*m8458170971r.",
+    "port": 222,
+    "protocol": "sftp",
+    "uploadOnSave": true,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git"
+    ]
+}
