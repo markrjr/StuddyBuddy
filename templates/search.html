@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>{{ USERNAME }}'s Profile - StudyBuddy</title>
+  <title>Search - StudyBuddy</title>
 
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,150,500,700' rel='stylesheet' type='text/css'>
@@ -18,38 +18,39 @@
 <body>
 
   <div class="navbar">
-    <button id="upload-btn" class="button button-small button-primary" onclick="uploadFile()" style="margin: 5px;">Upload</button>
-    <a href="/logout"><button class="button button-small" style="margin: 5px;">Logout</button></a>
     <a href="/"><button class="button button-small" style="margin: 5px;">Home</button></a>
   </div>
 
   <div class="flex-container page column">
 
-    <div id="files-dialog" class="centered" style="text-align: left; width: 60%; padding-left: 50px; padding-right: 50px;">
+    <div id="search-dialog" class="centered" style="text-align: left; width: 60%; padding-left: 50px; padding-right: 50px;">
 
-      <h1 class="huge-header" style="text-align: center">{{ USERNAME }}'s Files</h1>
-      <hr size="3">
+      {% if not FILES  %}
 
-      {% if not USER_FILES  %}
+        <h1 class="huge-header" style="text-align: center">Oops</h1>
+        <hr size="3">
 
         <div class="card" style="margin: 15px; padding: 15px;">
           <div>
-            <h4>No files found.<h4>
+            <h4>We couldn't find the quiz or test you were looking for.<h4>
           </div>
           <hr size="3" style="margin: 0">
         </div>
 
       {% else %}
 
-        {% for file in USER_FILES %}
+
+        <h1 class="huge-header" style="text-align: center">"{{ SEARCH_TERM }}"</h1>
+        <hr size="3">
+
+        {% for file in FILES %}
 
           <form action="/delete" method="POST" class="card" style="margin: 15px; padding: 15px;">
             <div>
               <a href="/assignment/{{ file.id }}"><h4>{{ file.name }} <h4></a>
             </div>
             <hr size="3" style="margin: 0">
-            <p>Usefulness {{ ((file.rating.useful_yes / file.rating.total_useful_votes) * 100) }}% | Relevance {{ ((file.rating.relevant_yes / file.rating.total_relevance_votes) * 100) }}% | {{ file.date_uploaded }} </p>
-            <button type="submit" name="file-to-delete" class="button button-small warning" value="{{ file.server_name }}">Delete</button>
+            <p>Usefulness {{ file.rating.total_useful_votes == 0 or ((file.rating.useful_yes / file.rating.total_useful_votes) * 100) }}% | Relevance {{ file.rating.total_relevance_votes == 0 or ((file.rating.relevant_yes / file.rating.total_relevance_votes) * 100) }}% | {{ file.date_uploaded }} </p>
           </form>
 
         {% endfor %}
@@ -97,14 +98,6 @@
     Made by Mark and Tony &copy; 2016
   </div>
 
-  <!-- Axios -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.min.js"></script>
-
-  <!-- AutoComplete -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.js"></script>
-
-  <!-- Custom JS -->
-  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 
 </body>
 </html>

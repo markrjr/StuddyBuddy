@@ -9,7 +9,6 @@ class BaseModel(Model):
         database = db
 
 class User(BaseModel):
-    uid = UUIDField(null=False, unique=True)
     username = CharField(null=False, default="unknown")
     email = CharField(null=False, unique=True)
     password = CharField(null=False)
@@ -23,10 +22,10 @@ class Course(BaseModel):
     school = ForeignKeyField(University)
 
 class Rating(BaseModel):
-    relevant_yes = IntegerField(default=0)
-    useful_yes = IntegerField(default=0)
-    total_useful_votes = IntegerField(default=0)
-    total_relevance_votes = IntegerField(default=0)
+    relevant_yes = IntegerField(default=1)
+    useful_yes = IntegerField(default=1)
+    total_useful_votes = IntegerField(default=1)
+    total_relevance_votes = IntegerField(default=1)
 
 class File(BaseModel):
     name = CharField(default="unknown")
@@ -34,7 +33,7 @@ class File(BaseModel):
     server_name = CharField(default="unknown")
     date_uploaded = CharField(default="unknown")
     grade = CharField(default="unknown")
-    uploaded_by = ForeignKeyField(User)
+    uploaded_by = CharField(default="unknown")
     rating = ForeignKeyField(Rating, null=True)
     course = ForeignKeyField(Course, null=True)
 
