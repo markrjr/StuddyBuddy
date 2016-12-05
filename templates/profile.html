@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>{{ USERNAME }}'s Profile - StudyBuddy</title>
+
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,150,500,700' rel='stylesheet' type='text/css'>
+
+  <!-- CSS  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bigfishtv-turret/3.3.1/turret.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+</head>
+<body>
+
+  <div class="navbar">
+    <button id="upload-btn" class="button button-small button-primary" onclick="uploadFile()" style="margin: 5px;">Upload</button>
+    <a href="/logout"><button class="button button-small" style="margin: 5px;">Logout</button></a>
+    <a href="/"><button class="button button-small" style="margin: 5px;">Home</button></a>
+  </div>
+
+  <div class="flex-container page column">
+
+    <div id="files-dialog" class="centered" style="text-align: left; width: 60%; padding-left: 50px; padding-right: 50px; margin-bottom: 50px;">
+
+      <h1 id="major-header" class="huge-header" style="text-align: center">{{ USERNAME }}'s Files</h1>
+      <hr size="3">
+
+      <div class="card" style="margin: 15px; padding: 15px;">
+        <div style="display: inline;">
+          <h4>Discrete Mathematics Exam 1<h4>
+        </div>
+        <hr size="3" style="margin: 0">
+        <p>Usefulness 90% | Relevance 90% | Uploaded on 2-05-2015 </p>
+        <button class="button button-small warning">Delete</button>
+      </div>
+
+      <div class="card" style="margin: 15px; padding: 15px;">
+        <div style="display: inline;">
+          <h4>Calculus 1 For Engineers Exam 2<h4>
+        </div>
+        <hr size="3" style="margin: 0">
+        <p>Usefulness 65% | Relevance 90% | Uploaded on 5-11-2014 </p>
+        <button class="button button-small warning">Delete</button>
+      </div>
+
+      <div class="card" style="margin: 15px; padding: 15px;">
+        <div style="display: inline;">
+          <h4>Computer Engineering 2210 Exam 3<h4>
+        </div>
+        <hr size="3" style="margin: 0">
+        <p>Usefulness 50% | Relevance 90% | Uploaded on 7-09-2011 </p>
+        <button class="button button-small warning">Delete</button>
+      </div>
+      
+    </div>
+
+    <div id="upload-dialog" class="centered card" style="display: none; text-align: left; width: 60%; padding-left: 50px; padding-right: 50px; margin-bottom: 50px;">
+
+
+  </div>
+
+  <div class="footer">
+    Made by Mark and Tony &copy; 2016
+  </div>
+
+  <!-- Axios -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.2/axios.min.js"></script>
+
+  <!-- AutoComplete -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.js"></script>
+
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+</body>
+</html>

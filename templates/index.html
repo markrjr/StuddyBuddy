@@ -3,7 +3,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-  <title>StuddyBuddy</title>
+  <title>StudyBuddy</title>
 
   <!-- Google Fonts -->
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
@@ -12,16 +12,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bigfishtv-turret/3.3.1/turret.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-  <link rel="stylesheet" href="static/css/autocomplete.css">
-  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/autocomplete.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
 </head>
 <body>
 
   <div class="navbar">
-    <button id="register-btn" class="button button-small" onclick="popModal('register')" style="margin: 5px;">Register</button>
-    <button id="login-btn" class="button button-small" onclick="popModal('login')" style="margin: 5px;">Login</button>
+
     <button id="back-btn" class="button button-small" onclick="popModal('back')" style="margin: 5px; display:none;">Back</button>
+    {% if 'user' in session %}
+    <a href="/logout"><button class="button button-small" style="margin: 5px;">Logout</button></a>
+    <a href="/profile"><button class="button button-small" style="margin: 5px;">Hello, {{ USERNAME }}</button></a>
+    {% else %}
+      <button id="register-btn" class="button button-small" onclick="popModal('register')" style="margin: 5px;">Register</button>
+      <button id="login-btn" class="button button-small" onclick="popModal('login')" style="margin: 5px;">Login</button>
+    {% endif %}
   </div>
 
   <div class="flex-container page column">
@@ -32,12 +38,12 @@
         <img src="static/images/bookshelf.png" width="10%;" alt="Bookshelf-Logo"><h1/>
       </div>
 
-      <div class="input-group input-group-search centered">
-        <input id="document-search" class="input-xlarge" type="search" placeholder="Calculus 1 For Engineers Exam 1">
+      <form action="/search" method="POST" class="input-group input-group-search centered">
+        <input name="search_term" id="document-search" class="input-xlarge" type="search" placeholder="Calculus 1 For Engineers Exam 1">
         <span class="input-group-button">
           <button class="button button-xlarge" type="submit">Search</button>
         </span>
-      </div>
+      </form>
 
     </div>
 
@@ -85,7 +91,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.js"></script>
 
   <!-- Custom JS -->
-  <script src="static/js/index.js"></script>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 </body>
 </html>

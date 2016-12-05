@@ -1,37 +1,3 @@
-var search = document.getElementById("document-search");
-
-// var cars = ["Calculus 1 For Engineers Exam 1",
-//             "Calculus 2 For Engineers Exam 3",
-//             "Discrete Math for Computer Scientists Final Exam",
-//             "Biology Laboratory for Biology Majors Quiz 5"];
-
-new autoComplete({
-    selector: search,
-    minChars: 2,
-    source: function(term, response) {
-
-        axios.get('/search?term=' + term)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-    }
-});
-
-function login()
-{
-    axios.post('/login)
-    .then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.log(error);
-    });
-}
-
 function popModal(modalType)
 {
     var search_container = document.getElementById("search-container");

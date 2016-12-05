@@ -8,13 +8,11 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-
 class User(BaseModel):
     uid = UUIDField(null=False, unique=True)
     username = CharField(null=False, default="unknown")
     email = CharField(null=False, unique=True)
     password = CharField(null=False)
-    session = CharField(null=True, max_length=128)
 
 class University(BaseModel):
     name = CharField(default="unknown")
@@ -33,6 +31,7 @@ class Rating(BaseModel):
 class File(BaseModel):
     name = CharField(default="unknown")
     semester = CharField(default="unknown")
+    server_name = CharField(default="unknown")
     date_uploaded = CharField(default="unknown")
     grade = CharField(default="unknown")
     uploaded_by = ForeignKeyField(User)
