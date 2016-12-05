@@ -45,7 +45,7 @@ def index():
 @login_required
 def profile():
     user_files = []
-    for a_file in File.select():
+    for a_file in User_File.select():
         if a_file.uploaded_by == session["user"]["email"]:
             user_files.append(a_file)
     if not user_files:
@@ -58,7 +58,7 @@ def profile():
 @app.route('/assignment/<file_id>')
 def assignment(file_id):
     try:
-        a_file = File.get(File.id == file_id)
+        a_file = User_File.get(User_File.id == file_id)
         if path.isfile(UPLOAD_FOLDER + a_file.server_name):
             return render_template("file.html", USER_FILE=a_file)
         else:
@@ -89,7 +89,7 @@ def upload_file():
             filename = sub(r'\W+', '', without_extension[0])
             filename = filename + "." + without_extension[1]
             file.save(path.join(app.config['UPLOAD_FOLDER'], filename))
-            uploaded = File.create(name=request.form["assignment-name"],
+            uploaded = User_File.create(name=request.form["assignment-name"],
                             date_uploaded=datetime.utcnow().strftime("%b %d, %Y"),
                             semester=request.form["semester"],
                             uploaded_by=session["user"]["email"],
@@ -104,11 +104,10 @@ def upload_file():
 @app.route('/delete', methods=["POST"])
 @login_required
 def delete():
-    for a_file in File.select():
+    for a_file in User_File.select():
         if a_file.server_name == request.form["file-to-delete"]:
             remove(UPLOAD_FOLDER + a_file.server_name)
-            a_file.rating.delete_instance()
-            a_file.delete_instance()
+            a_file.delete_instance(recursive=True)
             return redirect(url_for('generic_message', success="FILE_DELETE_SUCCESS"))
         else:
             return redirect(url_for('generic_error', error="FILE_DELETE_FAILURE"))
@@ -141,7 +140,7 @@ def generic_message(success):
 def login():
     user = None
     try:
-        user = User.get(User.email == request.form["email"])
+        user = Uploader.get(Uploader.email == request.form["email"])
         if user.password == request.form["pass"]:
             user = {"email" : user.email, "username" : user.username}
             session["user"] = user
@@ -159,7 +158,7 @@ def logout():
 
 @app.route('/register', methods=["POST"])
 def register():
-    user = User.create(email=request.form["email"],
+    user = Uploader.create(email=request.form["email"],
                             username=request.form["username"],
                             password=request.form["pass"])
     user.save()
@@ -170,7 +169,7 @@ def register():
 @app.route('/search', methods=["POST"])
 def search():
     list_of_files = []
-    for a_file in File.select():
+    for a_file in User_File.select():
         if request.form["search_term"] in a_file.name or request.form["search_term"] == a_file.name:
             list_of_files.append(a_file)
     return render_template("search.html", SEARCH_TERM=request.form["search_term"], FILES=list_of_files)

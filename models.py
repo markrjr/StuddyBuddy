@@ -8,7 +8,7 @@ class BaseModel(Model):
     class Meta:
         database = db
 
-class User(BaseModel):
+class Uploader(BaseModel):
     username = CharField(null=False, default="unknown")
     email = CharField(null=False, unique=True)
     password = CharField(null=False)
@@ -27,7 +27,7 @@ class Rating(BaseModel):
     total_useful_votes = IntegerField(default=1)
     total_relevance_votes = IntegerField(default=1)
 
-class File(BaseModel):
+class User_File(BaseModel):
     name = CharField(default="unknown")
     semester = CharField(default="unknown")
     server_name = CharField(default="unknown")
