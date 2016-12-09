@@ -1,7 +1,7 @@
 from peewee import *
 from playhouse.db_url import connect
 
-db = connect("mysql://root:reallysecurepassword@localhost:3306/studdybuddy")
+db = connect("mysql://root:reallysecurepassword@localhost:3306/studybuddy")
 
 
 class BaseModel(Model):
@@ -37,4 +37,4 @@ class User_File(BaseModel):
     rating = ForeignKeyField(Rating, null=True)
     course = ForeignKeyField(Course, null=True)
 
-# db.create_tables([User, University, Course, Rating, File])
+# db.create_tables([Uploader, University, Course, Rating, User_File])

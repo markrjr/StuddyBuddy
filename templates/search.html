@@ -40,8 +40,16 @@
       {% else %}
 
 
-        <h1 class="huge-header" style="text-align: center">"{{ SEARCH_TERM }}"</h1>
-        <hr size="3">
+        {% if "Files for " in SEARCH_TERM %}
+
+          <h1 style="text-align: center">{{ SEARCH_TERM }}</h1>
+          <hr size="3">
+        
+        {% else %}
+          <h1 class="huge-header" style="text-align: center">"{{ SEARCH_TERM }}"</h1>
+          <hr size="3">
+        
+        {% endif %}
 
         {% for file in FILES %}
 

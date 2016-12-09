@@ -18,7 +18,6 @@ app.secret_key = urandom(64)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SESSION_USE_SIGNER'] = True
 
-
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -33,6 +32,11 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 ######################## ROUTES ########################
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route('/')
 def index():
@@ -169,10 +173,24 @@ def register():
 @app.route('/search', methods=["POST"])
 def search():
     list_of_files = []
-    for a_file in User_File.select():
-        if request.form["search_term"] in a_file.name or request.form["search_term"] == a_file.name:
-            list_of_files.append(a_file)
-    return render_template("search.html", SEARCH_TERM=request.form["search_term"], FILES=list_of_files)
+    search_term = request.form["search_term"]
+    for school in University.select():
+        if search_term == school.name:
+            for a_file in User_File.select():
+                if a_file.course and a_file.course.school.id == school.id:
+                    list_of_files.append(a_file)
+                    search_term = "Files for " + school.name
+    for course in Course.select():
+        if search_term == course.name:
+            for a_file in User_File.select():
+                if a_file.course.id == course.id:
+                    list_of_files.append(a_file)
+                    search_term = "Files for " + course.name
+    if not list_of_files:
+        for a_file in User_File.select():
+            if search_term in a_file.name or search_term == a_file.name:
+                list_of_files.append(a_file)
+    return render_template("search.html", SEARCH_TERM=search_term, FILES=list_of_files)
 
 if __name__ == "__main__":
   app.run(debug=True, host="0.0.0.0", port=80)
